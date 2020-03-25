@@ -8,3 +8,11 @@ services:
     tty: true
     volumes:
       - ./workspace:/root/workspace
+  app:
+    hostname: "haskell-sandbox"
+    build:
+      context: ./docker/app
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ./workspace/app:/root/workspace/app
