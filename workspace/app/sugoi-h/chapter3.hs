@@ -32,6 +32,15 @@ qequel (m,n) (o,p)
    | p == 0 = error "error"
    | otherwise = m*p == n*o 
 
+qlist :: (Int, Int) -> Int -> [(Int, Int)]
+qlist (_,0) _ = error "error"
+qlist (a,b) c | b < 0 = qlist (-a,-b) c
+qlist (a,b) c = 
+  let g = gcd a b
+      a' = a `div` g
+      b' = b `div` g
+  in take c [(s * a' * n, s * b' * n) | n <- [1..], s <- [1,-1]]
+
 main :: IO()
-main = print$qequel (1,2) (-4,-8)
+main = print$qlist (1,2) 11
 -- main = print$[tri_case n | n <- [0..10]]
